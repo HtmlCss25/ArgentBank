@@ -1,0 +1,162 @@
+swagger: '2.0'
+info:
+  title: API Proposal for transactions
+  version: 1.0.0
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+host: localhost:3001
+basePath: /api/v1
+schemes:
+  - http
+paths:
+  /Account:
+    post:
+      tags:
+        - Account 
+      summary: Get account information by userId
+      parameters:
+        - name: body
+          in: body
+          description: ID of the user
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+      security:
+        - Bearer: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+            properties:
+              accountId:
+                type: integer
+              balance:
+                type: integer
+        '400':
+          description: Invalid request
+        '500':
+          description: Internal server error
+        default:
+          description: Unexpected error
+  /Transaction:
+    post:
+      tags:
+        - Transaction
+      summary: Retrieve transaction list by userId
+      parameters:
+        - name: body
+          in: body
+          description: ID of the user
+          required: true
+          schema:
+            type: object
+            properties:
+              user_id:
+                type: integer
+      security:
+        - Bearer: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                date:
+                  type: string
+                recipient:
+                  type: string
+                type:
+                  type: string
+                category:
+                  type: string
+                note:
+                  type: string
+                amount:
+                  type: integer
+                balanceAfterTransaction:
+                  type: integer
+                accountId:
+                  type: integer
+        '400':
+          description: Invalid request
+        '500':
+          description: Internal server error
+        default:
+          description: Unexpected error
+  /Transaction/category:
+    put:
+      tags:
+        - Transaction
+      summary: Update a transaction's category        
+      parameters:
+        - name: body
+          in: body
+          description: ID of the transaction to update
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              newCategory: 
+                type: string
+      security:
+        - Bearer: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+            properties:
+              newCategory:
+                type: string
+        '400':
+          description: Invalid request
+        '500':
+          description: Internal server error
+        default:
+          description: Unexpected error
+  /Transaction/note:
+    put:
+      tags:
+        - Transaction
+      summary: Update a transaction note
+      parameters:
+        - name: body
+          in: body
+          description: ID of the transaction to update
+          required: true
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              newNote: 
+                type: string
+      security:
+        - Bearer: []
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: object
+            properties:
+              newNote:
+                type: string
+        '400':
+          description: Invalid request
+        '500':
+          description: Internal server error
+        default:
+          description: Unexpected error
