@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#doc swagger
+Pancrazi_Lucas_1_swagger_phase_2_042024.yaml

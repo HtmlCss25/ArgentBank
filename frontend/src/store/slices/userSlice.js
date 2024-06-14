@@ -23,7 +23,6 @@ export const getUserData = createAsyncThunk(
         }
   
         const data = await response.json();
-        localStorage.setItem("user", JSON.stringify(data.body));
         dispatch(setUser(data.body));
         return data.body
   

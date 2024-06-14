@@ -32,6 +32,7 @@ const Modal = ({handleCancelClick})=>{
         .then(data => {
             console.log('Données reçues :', data);
             dispatch(setUser(data.body))
+            handleCancelClick();
         })
         .catch(error => {
             console.error('Erreur lors de la récupération des données :', error);

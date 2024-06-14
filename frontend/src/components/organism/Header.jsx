@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import {useDispatch} from 'react-redux';
 import {clearToken} from '../../store/slices/logSlice'
-import { userNameSelect } from '../../store/slices/userSlice';
+import { clearUser, userNameSelect } from '../../store/slices/userSlice';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,28 +13,30 @@ const Header = ()=>{
     const dispatch = useDispatch()
     const logout = ()=>{
         dispatch(clearToken());
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
+        dispatch(clearUser());
         navigate('/');
     }
 
     return(
         <nav className="main-nav">
-            <a className="main-nav-logo" href="/">
+            <Link to={"/"} className='main-nav-logo'>
                 <img
                     className="main-nav-logo-image"
-                    src="./img/argentBankLogo.png"
+                    src="./img/argentBankLogo.webp"
                     alt="Argent Bank Logo"
                 />
                 <h1 className="sr-only">Argent Bank</h1>
-            </a>
+
+            </Link>
             <div>
                 {token && userName ? 
-                    <a className="main-nav-item" onClick={logout}>
+                    <>
+                    <a className="main-nav-item" onClick={()=>{navigate('/user')}}>
                         <i className="fa fa-user-circle"></i>
-                        {userName}
-                        <span> : Logout</span>
+                        {userName+" :"}
                     </a>
+                    <a className="main-nav-item" onClick={logout}>Logout</a>
+                    </>
                     :
                     <Link className="main-nav-item" to="./sign-in">
                         <i className="fa fa-user-circle"></i>

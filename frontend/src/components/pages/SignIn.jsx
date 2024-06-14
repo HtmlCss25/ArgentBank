@@ -44,44 +44,12 @@ const SignIn = ()=>{
       .catch((error) => {
         setErrorMessage(error);
       });
-
-    // try{
-    //   fetch("http://localhost:3001/api/v1/user/login",{
-    //     method:"POST",
-    //     headers:{
-    //       "Content-Type":"application/json",
-    //     },
-    //     body: JSON.stringify(userInfo)
-    //   })
-    //   .then(res=>{
-    //     if(!res.ok){
-    //       return {error : {
-    //         code : res.status,
-    //         message: res.statusText,
-    //       }}
-    //     }
-    //     return res.json()
-    //   })
-    //   .then(data=>{
-        
-    //     if(data.error && data.error.code === 400){
-    //       setErrorMessage("Login failed ! Invalid Email or Password ! ")
-    //     }else if(data){
-    //       localStorage.setItem("token", data.body.token);
-    //       dispatch(setToken(localStorage.token));
-    //       window.location.href = "/user";
-    //     }
-    //   })
-    // }
-    // catch(err){
-    //   console.error(err);
-    // }
   }
 
     return(
-        <main class="main bg-dark">
-      <section class="sign-in-content">
-        <i class="fa fa-user-circle sign-in-icon"></i>
+        <main className="main bg-dark">
+      <section className="sign-in-content">
+        <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
         {errorMessage && <p>{errorMessage}</p>}
         <form>
@@ -100,7 +68,7 @@ const SignIn = ()=>{
             id="remember-me"
             label="Remember me"
           />
-          <button class="sign-in-button" onClick={handleSubmitBtnClick}>Sign In</button>
+          <button className="sign-in-button" onClick={handleSubmitBtnClick}>Sign In</button>
         </form>
       </section>
     </main>
