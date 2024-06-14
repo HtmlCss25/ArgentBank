@@ -30,7 +30,6 @@ const SignIn = ()=>{
               dispatch(getUserData(result.payload.token))
               .then((res)=>{
                 if(res){
-                  // window.location.href = "/user";
                   navigate('/user');
                 }
               })

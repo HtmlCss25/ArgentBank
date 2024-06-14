@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import FormField from '../molecules/FormField';
 import {useSelector} from 'react-redux';
 import {useDispatch} from "react-redux";
-import { firstNameSelect, getUserData, lastNameSelect, setUser, userNameSelect } from "../../store/slices/userSlice";
+import { firstNameSelect, lastNameSelect, setUser, userNameSelect } from "../../store/slices/userSlice";
 
 const Modal = ({handleCancelClick})=>{
     
@@ -30,7 +30,6 @@ const Modal = ({handleCancelClick})=>{
             return response.json();
         })
         .then(data => {
-            console.log('Données reçues :', data);
             dispatch(setUser(data.body))
             handleCancelClick();
         })
@@ -46,7 +45,6 @@ const Modal = ({handleCancelClick})=>{
     const handleFormSubmit = (e)=>{
         e.preventDefault();
         postRequestUserName(inputValue, token);
-        // dispatch(getUserData(token));
     }
 
     return(
