@@ -9,13 +9,15 @@ import { useNavigate } from 'react-router-dom';
 const SignIn = ()=>{
   let navigate = useNavigate();
   const [errorMessage, setErrorMessage] = useState(null)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
   const handleSubmitBtnClick = (e)=>{
     e.preventDefault();
     const userInfo = {
-      "email" : document.getElementById("username").value,
-      "password": document.getElementById("password").value,
+      "email" : email,
+      "password": password
     }
 
     dispatch(setTokenAsync(userInfo))
@@ -56,11 +58,15 @@ const SignIn = ()=>{
             type="text"
             id="username"
             label="Username"
+            value={email}
+            handleChange ={(e)=>{setEmail(e.target.value)}}
           />
           <FormField
             type="password"
             id="password"
             label="Password"
+            value={password}
+            handleChange ={(e)=>{setPassword(e.target.value)}}
           />
           <FormField
             type="checkbox"

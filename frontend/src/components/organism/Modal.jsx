@@ -11,14 +11,13 @@ const Modal = ({handleCancelClick})=>{
     const lastName = useSelector(lastNameSelect);
     const token = useSelector((state)=> state.log.token);
     const dispatch = useDispatch();
-
     const [inputValue,setInputValue] = useState(userName)
 
     const postRequestUserName = (newUserName, token)=>{
         fetch('http://localhost:3001/api/v1/user/profile',{
             method : 'PUT',
             headers:{
-                "Authorization" : `Bearer ${token}`,
+                "Authorization" : `Bearer ${token.token}`,
                 'Content-Type' : 'application/json'
             },
             body: JSON.stringify({"userName": newUserName})
@@ -30,6 +29,7 @@ const Modal = ({handleCancelClick})=>{
             return response.json();
         })
         .then(data => {
+            
             dispatch(setUser(data.body))
             handleCancelClick();
         })

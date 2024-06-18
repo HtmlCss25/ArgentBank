@@ -12,8 +12,8 @@ basePath: /api/v1
 schemes:
   - http
 paths:
-  /Account:
-    post:
+  /user/{userId}/account:
+    get:
       tags:
         - Account 
       summary: Get account information by userId
@@ -27,6 +27,11 @@ paths:
             properties:
               id:
                 type: integer
+        - in: path
+          name: userId
+          description: Id of the transaction that needs to be edited
+          required: true
+          type: string
       security:
         - Bearer: []
       responses:
@@ -45,8 +50,8 @@ paths:
           description: Internal server error
         default:
           description: Unexpected error
-  /Transaction:
-    post:
+  /user/transaction:
+    get:
       tags:
         - Transaction
       summary: Retrieve transaction list for the current month, by account
@@ -97,8 +102,8 @@ paths:
           description: Internal server error
         default:
           description: Unexpected error
-  /Transaction/details/{transactionId}:
-    post:
+  /user/transaction/{transactionId}:
+    get:
       tags:
         - Transaction
       summary: Retrieve transaction details by id
@@ -141,7 +146,6 @@ paths:
           description: Internal server error
         default:
           description: Unexpected error
-  /Transaction/{transactionId}:
     put:
       tags:
         - Transaction
@@ -185,7 +189,7 @@ paths:
           description: Internal server error
         default:
           description: Unexpected error
-  /Transaction/category/{transactionId}:
+  /user/transaction/{transactionId}/category:
     delete:
       tags:
         - Transaction
@@ -216,7 +220,7 @@ paths:
           description: Internal server error
         default:
           description: Unexpected error
-  /Transaction/note/{transactionId}:
+  /user/transaction/{transactionId}/note:
     delete:
       tags:
         - Transaction

@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import AccountCard from "../organism/AccountCard";
 import {useSelector} from 'react-redux';
-import { firstNameSelect, getUserData, lastNameSelect, userNameSelect } from "../../store/slices/userSlice";
-import {useDispatch} from "react-redux";
+import { firstNameSelect, lastNameSelect } from "../../store/slices/userSlice";
 import Modal from "../organism/Modal";
 
 const User = ()=>{
