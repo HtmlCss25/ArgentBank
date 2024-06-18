@@ -3,7 +3,6 @@ import {useState} from "react";
 import FormField from "../molecules/FormField";
 import {useDispatch} from "react-redux";
 import {setTokenAsync} from "../../store/slices/logSlice";
-import { getUserData } from "../../store/slices/userSlice";
 import { useNavigate } from 'react-router-dom';
 
 const SignIn = ()=>{
@@ -22,24 +21,10 @@ const SignIn = ()=>{
 
     dispatch(setTokenAsync(userInfo))
       .then((result) => {
-        if(result.payload && result.payload.code){
-          switch(result.payload.code){
-            case 400 : setErrorMessage("Login Failed !")
-              break;
-            case 500 : setErrorMessage("Server Error")
-              break;
-            case 200 :
-              dispatch(getUserData(result.payload.token))
-              .then((res)=>{
-                if(res){
-                  navigate('/user');
-                }
-              })
-              
-              break;
-            default:
-              break;
-          }
+        if(result.payload && result.payload.message){
+          setErrorMessage(result.payload.message);
+        }else{
+          navigate('/user');
         }
       })
       .catch((error) => {

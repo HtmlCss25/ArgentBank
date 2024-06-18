@@ -50,7 +50,7 @@ paths:
           description: Internal server error
         default:
           description: Unexpected error
-  /user/transaction:
+  /user/account/{accountId}/transaction:
     get:
       tags:
         - Transaction
@@ -61,15 +61,11 @@ paths:
           description: Attach Bearer JWT token
           required: true
           type: string
-        - name: body
-          in: body
-          description: ID of the user
+        - in: path
+          name: accountId
+          description: Id of the transaction that needs to be edited
           required: true
-          schema:
-            type: object
-            properties:
-              account_id:
-                type: integer
+          type: string
       security:
         - Bearer: []
       responses:
@@ -102,7 +98,7 @@ paths:
           description: Internal server error
         default:
           description: Unexpected error
-  /user/transaction/{transactionId}:
+  /user/account/transaction/{transactionId}:
     get:
       tags:
         - Transaction
@@ -189,7 +185,7 @@ paths:
           description: Internal server error
         default:
           description: Unexpected error
-  /user/transaction/{transactionId}/category:
+  /user/account/transaction/{transactionId}/category:
     delete:
       tags:
         - Transaction
@@ -220,7 +216,7 @@ paths:
           description: Internal server error
         default:
           description: Unexpected error
-  /user/transaction/{transactionId}/note:
+  /user/account/transaction/{transactionId}/note:
     delete:
       tags:
         - Transaction

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk  } from "@reduxjs/toolkit";
-
+import { getUserData } from "../../store/slices/userSlice";
 
 
 export const setTokenAsync = createAsyncThunk(
@@ -26,10 +26,10 @@ export const setTokenAsync = createAsyncThunk(
 
       if (data.body && data.body.token) {
         dispatch(setToken(data.body.token));
+        dispatch(getUserData(data.body.token))
         return {code:200, token:data.body.token};
       }
     } catch (error) {
-      console.error(error);
       return rejectWithValue(error.message);
     }
   }
