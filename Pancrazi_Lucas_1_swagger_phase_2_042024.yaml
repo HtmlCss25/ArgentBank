@@ -18,15 +18,6 @@ paths:
         - Account 
       summary: Get account information by userId
       parameters:
-        - name: body
-          in: body
-          description: ID of the user
-          required: true
-          schema:
-            type: object
-            properties:
-              id:
-                type: integer
         - in: path
           name: userId
           description: Id of the transaction that needs to be edited
@@ -164,8 +155,6 @@ paths:
           schema:
             type: object
             properties:
-              id:
-                type: integer
               newCategory: 
                 type: string
               newNote: 
@@ -198,7 +187,7 @@ paths:
           type: string
         - in: path
           name: transactionId
-          description: Id of the transaction
+          description: Id of the transaction where category needs to be deleted
           required: true
           type: string
       security:
@@ -229,7 +218,7 @@ paths:
           type: string
         - in: path
           name: transactionId
-          description: Id of the transaction that needs to be edited
+          description: Id of the transaction where note needs to be deleted
           required: true
           type: string
       security:
