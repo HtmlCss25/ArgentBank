@@ -25,7 +25,6 @@ export const setTokenAsync = createAsyncThunk(
       const data = await response.json();
 
       if (data.body && data.body.token) {
-        dispatch(setToken(data.body.token));
         dispatch(getUserData(data.body.token))
         return {code:200, token:data.body.token};
       }

@@ -1,16 +1,17 @@
 import React from "react";
 import {useState} from "react";
 import FormField from "../molecules/FormField";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setTokenAsync} from "../../store/slices/logSlice";
 import { useNavigate } from 'react-router-dom';
 
 const SignIn = ()=>{
   let navigate = useNavigate();
-  const [errorMessage, setErrorMessage] = useState(null)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  
+  const error = useSelector((state) => state.log.error);
 
   const handleSubmitBtnClick = (e)=>{
     e.preventDefault();
@@ -20,16 +21,9 @@ const SignIn = ()=>{
     }
 
     dispatch(setTokenAsync(userInfo))
-      .then((result) => {
-        if(result.payload && result.payload.message){
-          setErrorMessage(result.payload.message);
-        }else{
-          navigate('/user');
-        }
+      .then(() => {
+        navigate('/user');
       })
-      .catch((error) => {
-        setErrorMessage(error);
-      });
   }
 
     return(
@@ -37,7 +31,7 @@ const SignIn = ()=>{
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
-        {errorMessage && <p>{errorMessage}</p>}
+        {error && <p>{`${error.code} : ${error.message}`}</p>}
         <form>
           <FormField
             type="text"

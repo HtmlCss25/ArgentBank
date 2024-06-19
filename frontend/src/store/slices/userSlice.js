@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk  } from "@reduxjs/toolkit";
 
 export const getUserData = createAsyncThunk(
     'log/getUserData',
-    async(token,{dispatch, rejectWithValue})=>{
+    async(token,{rejectWithValue})=>{
       try{
         const response = await fetch("http://localhost:3001/api/v1/user/profile",{
           method: "POST",
@@ -23,12 +23,11 @@ export const getUserData = createAsyncThunk(
         }
   
         const data = await response.json();
-        dispatch(setUser(data.body));
         return data.body
   
       }
       catch(error){
-        console.error(error)
+        return rejectWithValue(error.message);
       }
     }
 )

@@ -44,7 +44,9 @@ const Modal = ({handleCancelClick})=>{
 
     const handleFormSubmit = (e)=>{
         e.preventDefault();
-        postRequestUserName(inputValue, token);
+        if(inputValue.length > 0){
+            postRequestUserName(inputValue, token);
+        }
     }
 
     return(
